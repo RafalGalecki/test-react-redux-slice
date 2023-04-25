@@ -1,17 +1,14 @@
-import { Button } from 'components/Button/Button';
-import css from './StatusFilter.module.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { setStatusFilter } from 'redux/actions';
-import { statusFilters } from '../../redux/constants';
+import { Button } from 'components/Button/Button';
+import { statusFilters } from 'redux/constants';
+import { getStatusFilter } from 'redux/selectors';
+import { setStatusFilter } from 'redux/filtersSlice';
+import css from './StatusFilter.module.css';
 
 export const StatusFilter = () => {
-  // Otrzymujemy odnośnik do funkcji wysyłania akcji
   const dispatch = useDispatch();
+  const filter = useSelector(getStatusFilter);
 
-  const filter = useSelector(state => state.filters.status);
-
-  // Wywołujemy generator akcji i przekazujemy wartość filtra
-  // Wysyłamy wynik – akcja zmiany filtra
   const handleFilterChange = filter => dispatch(setStatusFilter(filter));
 
   return (

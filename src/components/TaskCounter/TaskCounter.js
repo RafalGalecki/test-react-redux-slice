@@ -1,11 +1,10 @@
-import css from './TaskCounter.module.css';
 import { useSelector } from 'react-redux';
+import { getTasks } from 'redux/selectors';
+import css from './TaskCounter.module.css';
 
 export const TaskCounter = () => {
-  // Otrzymujemy tablicę zadań ze statusu Redux
-  const tasks = useSelector(state => state.tasks);
+  const tasks = useSelector(getTasks);
 
-  // Na bazie stausu Redux otrzymujemy dane pochodne
   const count = tasks.reduce(
     (acc, task) => {
       if (task.completed) {

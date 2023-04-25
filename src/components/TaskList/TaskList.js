@@ -1,7 +1,8 @@
-import { Task } from 'components/Task/Task';
-import css from './TaskList.module.css';
 import { useSelector } from 'react-redux';
+import { Task } from 'components/Task/Task';
+import { getTasks, getStatusFilter } from 'redux/selectors';
 import { statusFilters } from 'redux/constants';
+import css from './TaskList.module.css';
 
 const getVisibleTasks = (tasks, statusFilter) => {
   switch (statusFilter) {
@@ -15,11 +16,8 @@ const getVisibleTasks = (tasks, statusFilter) => {
 };
 
 export const TaskList = () => {
-  // Otrzymujemy tablicę zadań ze statusu Redux
-  const tasks = useSelector(state => state.tasks);
-  // Otrzymujemy wartość filtra ze statusu Redux
-  const statusFilter = useSelector(state => state.filters.status);
-  // Obliczamy tablicę zadań, które należy wyświetlić w interfejsie
+  const tasks = useSelector(getTasks);
+  const statusFilter = useSelector(getStatusFilter);
   const visibleTasks = getVisibleTasks(tasks, statusFilter);
 
   return (
